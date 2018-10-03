@@ -1,3 +1,8 @@
+# Backups do Emacs e outras coisas:
+*~
+*.sol.tex
+*.fc.tex
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

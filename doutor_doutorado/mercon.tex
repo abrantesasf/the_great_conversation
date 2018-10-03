@@ -1,0 +1,564 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template: Article
+%
+% Por: Abrantes Araújo Silva Filho
+%      abrantesasf@gmail.com
+%
+% Citação: Se você gostou deste template, por favor ajude a divulgá-lo mantendo
+%          o link para meu repositório GitHub em:
+%          https://github.com/abrantesasf/LaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Configura o tipo de documento, papel, tamanho da fonte e informações básicas
+%%% para as proriedades do PDF/DVIPS e outras propriedades do documento
+\RequirePackage{ifpdf}
+\ifpdf
+  % Classe, língua e tamanho da fonte padrão. Outras opções a considerar:
+  %   draft
+  %   onecolumn (padrão) ou twocolumn (OU usar o package multicol)
+  %   fleqn com ou sem leqno (alinhamento à esquerda das fórmulas e dos números)
+  %   oneside (padrão para article ou report) ou twoside (padrão para book)
+  \documentclass[pdftex, brazil, 12pt, oneside]{article}
+\else
+  % Classe, língua e tamanho da fonte padrão. Outras opções a considerar:
+  %   draft
+  %   onecolumn (padrão) ou twocolumn (OU usar o package multicol)
+  %   fleqn com ou sem leqno (alinhamento à esquerda das fórmulas e dos números)
+  %   oneside (padrão para article ou report) ou twoside (padrão para book)
+  \documentclass[brazil, 12pt]{article}
+\fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Carrega pacotes iniciais necessários para estrutura de controle e para a
+%%% criação e o parse de novos comandos
+\usepackage{ifthen}
+\usepackage{xparse}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Configuração do tamanho da página, margens, espaçamento entrelinhas e, se
+%%% necessário, ativa a indentação dos primeiros parágrafos.
+\ifpdf
+  \usepackage[pdftex]{geometry}
+\else
+  \usepackage[dvips]{geometry}
+\fi
+\geometry{a4paper, left=2.0cm, right=2.0cm, top=2.0cm, bottom=2.0cm}
+
+\usepackage{setspace}
+  %\singlespacing
+  \onehalfspacing
+  %\doublespacing
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Configurações de cabeçalho e rodapé:
+\usepackage{fancyhdr}
+%\setlength{\headheight}{1cm}
+%\setlength{\footskip}{1.5cm}
+%\renewcommand{\headrulewidth}{0.3pt}
+%\renewcommand{\footrulewidth}{0.0pt}
+%\pagestyle{fancy}
+%\renewcommand{\sectionmark}[1]{%
+%  \markboth{\uppercase{#1}}{}}
+%\renewcommand{\subsectionmark}[1]{%
+%  \markright{\uppercase{\thesubsection \hspace{0.1cm} #1}}{}}
+%\fancyhead{}
+%\fancyfoot{}
+%\newcommand{\diminuifonte}{%
+%    \fontsize{9pt}{9}\selectfont
+%}
+%\newcommand{\aumentafonte}{%
+%    \fontsize{12}{12}\selectfont
+%}
+% Configura cabeçalho e rodapé para documentos TWOSIDE
+%\fancyhead[EL]{\textbf{\thepage}}
+%\fancyhead[EC]{}
+%\fancyhead[ER]{\diminuifonte \textbf{\leftmark}}
+%\fancyhead[OR]{\textbf{\thepage}}
+%\fancyhead[OC]{}
+%\fancyhead[OL]{\diminuifonte \textbf{\rightmark}}
+%\fancyfoot[EL,EC,ER,OR,OC,OL]{}
+% Configura cabeçalho e rodapé para documentos ONESIDE
+%\lhead{ \fancyplain{}{sup esquerdo} }
+%\chead{ \fancyplain{}{sup centro} }
+%\rhead{ \fancyplain{}{\thesection} }
+%\lfoot{ \fancyplain{}{inf esquerdo} }
+%\cfoot{ \fancyplain{}{inf centro} }
+%\rfoot{ \fancyplain{}{\thepage} }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Configurações de encoding, lingua e fontes:
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+
+% Altera a fonte padrão do documento (nem todas funcionam em modo math):
+%   phv = Helvetica
+%   ptm = Times
+%   ppl = Palatino
+%   pbk = bookman
+%   pag = AdobeAvantGarde
+%   pnc = Adobe NewCenturySchoolBook
+\renewcommand{\familydefault}{ppl}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Carrega pacotes para referências cruzadas, citações dentro do documento,
+%%% links para internet e outros.Configura algumas opções.
+%%% Não altere a ordem de carregamento dos packages.
+\usepackage{varioref}
+\ifpdf
+  \usepackage[pdftex]{hyperref}
+    \hypersetup{
+      % Informações variáveis em cada documento (MUDE AQUI!):
+      pdftitle={Doutor é quem tem doutorado?},
+      pdfauthor={Paulo Roberto Merçon de Vargas},
+      pdfsubject={Discussão sobre o uso da palavra doutor para designar médicos},
+      pdfkeywords={doutor, doutorado, etimologia, história},
+      pdfinfo={
+        CreationDate={}, % Ex.: D:AAAAMMDDHH24MISS
+        ModDate={}       % Ex.: D:AAAAMMDDHH24MISS
+      },
+      % Coisas que você não deve alterar se não souber o que está fazendo:
+      unicode=true,
+      pdflang={pt-BR},
+      bookmarksopen=true,
+      bookmarksnumbered=true,
+      bookmarksopenlevel=5,
+      pdfdisplaydoctitle=true,
+      pdfpagemode=UseOutlines,
+      pdfstartview=FitH,
+      pdfcreator={LaTeX with hyperref package},
+      pdfproducer={pdfTeX},
+      pdfnewwindow=true,
+      colorlinks=true,
+      citecolor=green,
+      linkcolor=red,
+      filecolor=cyan,
+      urlcolor=blue
+    }
+\else
+  \usepackage{hyperref}
+\fi
+\usepackage{cleveref}
+\usepackage{url}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Carrega bibliotecas de símbolos (matemáticos, físicos, etc.), fontes
+%%% adicionais, e configura algumas opções
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{siunitx}
+  \sisetup{group-separator = {.}}
+  \sisetup{group-digits = {false}}
+  \sisetup{output-decimal-marker = {,}}
+\usepackage{bm}
+\usepackage{cancel}
+% Altera separador decimal via comando, se necessário (prefira o siunitx):
+%\mathchardef\period=\mathcode`.
+%\DeclareMathSymbol{.}{\mathord}{letters}{"3B}
+  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Carrega packages relacionados à computação
+\usepackage{algorithm2e}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{listings}
+  \lstset{literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+    {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+    {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+    {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+    {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+    {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+    {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+    {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+    {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+    {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+    {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+  }
+  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Ativa suporte extendido a cores
+\usepackage[svgnames]{xcolor} % Opções de cores: usenames (16), dvipsnames (64),
+                              % svgnames (150) e x11names (300).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Suporte à importação de gráficos externos
+\ifpdf
+  \usepackage[pdftex]{graphicx}
+\else
+  \usepackage[dvips]{graphicx}
+\fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Suporte à criação de gráficos proceduralmente na LaTeX:
+\usepackage{tikz}
+  \usetikzlibrary{arrows,automata,backgrounds,matrix,patterns,positioning,shapes,shadows}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Packages para tabelas
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{tabu}
+\usepackage{lscape}
+\usepackage{colortbl}  
+\usepackage{booktabs}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Packages ambientes de listas
+\usepackage{enumitem}
+\usepackage[ampersand]{easylist}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Packages para suporte a ambientes floats, captions, etc.:
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{placeins}
+\usepackage{caption}
+\usepackage{sidecap}
+\usepackage{subcaption}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Meus comandos específicos:
+% Commando para ``italizar´´ palavras em inglês (e outras línguas!):
+\newcommand{\ingles}[1]{\textit{#1}}
+
+% Commando para colocar o espaço correto entre um número e sua unidade:
+\newcommand{\unidade}[2]{\ensuremath{#1\,\mathrm{#2}}}
+\newcommand{\unidado}[2]{{#1}\,{#2}}
+
+% Produz ordinal masculino ou feminino dependendo do segundo argumento:
+\newcommand{\ordinal}[2]{%
+#1%
+\ifthenelse{\equal{a}{#2}}%
+{\textordfeminine}%
+{\textordmasculine}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Hifenização específica quando o LaTeX/Babel não conseguirem hifenizar:
+\babelhyphenation{Git-Hub}
+\usepackage{exsol}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMEÇA O DOCUMENTO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\title{Doutor é quem tem doutorado?}
+\author{Paulo Roberto Merçon de Vargas}
+\date{\small{Vitória, 24 de janeiro de 2002}}
+\maketitle
+\renewcommand{\abstractname}{Atenção! Entenda o título deste documento:}
+\abstract{O texto abaixo é uma cópia do discurso do Prof.\ Dr.\ \textbf{Paulo Roberto Merçon
+  de Vargas}, proferido em 24 de janeiro de 2002, para os formandos da \ordinal{58}{a}
+  Turma de Medicina da Universidade Federal do Espírito Santo (UFES). Note que \emph{o discurso
+  original não tem título} e a designação de ``Doutor é quem tem doutorado?''\ como
+  título foi feita por mim, Dr.\ Abrantes Araújo Silva Filho, como forma de chamar
+  a atenção para o movimento que questiona o uso de ``doutor'' como forma de
+  tratamento para os médicos. Agradeço ao Dr.\ Leonardo Goltara, que manteve a
+  cópia original do discurso em seu
+  \href{http://vicetreco.blogspot.com/2013/04/a-maior-aula-de-medicina-de-todas.html}{blog pessoal}.
+  Este documento está disponível para download em um
+  \href{https://github.com/abrantesasf/the\_great\_conversation}{repositório no GitHub}.}
+%\tableofcontents
+%\newpage
+
+\vspace {0.5 cm}
+
+\paragraph{Discurso do Paraninfo Paulo Roberto Merçon de Vargas, proferido em
+24 de janeiro de 2002, para a 58\textordfeminine\ Turma de Medicina da UFES.}\ \\%
+
+Magnífico Reitor da UFES, Prof.\ José Weber Freire Macedo; Magnífico Vice-Reitor da UFES,
+Prof.\ Rubens Sérgio Rasseli; Excelentíssimo Sr.\ Diretor do Centro Biomédico,
+Prof.\ Wilson Mário Zanotti; Excelentíssimos Patrono, Professores e demais homenageados
+da turma; Senhores pais, esposos, esposas e demais parentes dos doutorandos; Prezados senhores
+e senhoras; Queridos doutorandos\dots
+
+Hoje é um dia de alegria para todos nós. Cada um de vocês, doutorandos, familiares,
+professores e amigos, têm vários motivos para estarem felizes com esta formatura.
+Também eu.
+
+Para mim, ser escolhido paraninfo foi uma honra e uma alegria. É ótimo ser reconhecido
+e homenageado, mesmo que isto implique em fazer um discurso --- alguns formandos me disseram
+exatamente isto: que me escolheram para ouvir um discurso! Muito bem, vocês o terão. Eu
+espero que, em cumprimento do papel de paraninfo, este discurso seja um auxílio para a
+iniciação na vida profissional de vocês. Não será um discurso longo: uma pequena aula
+e um pedido.
+
+Em primeiro lugar, a aula.
+
+Não se preocupem: será uma aula breve. Eu gostaria de incluir uma prova de 200 questões
+do tipo marcar certo ou errado. Com uma resposta errada anulando uma resposta certa, mas,
+pensando bem, eu teria que corrigir prova e isto é muito chato. Desisto da prova.
+Além do mais, vocês estão formando, provas ficaram para trás!
+
+Minha intenção é que seja uma aula para todos (como o foi para mim). Não só para os formandos.
+Não pretendo ser exaustivo e advirto que conheço menos do que deveria sobre o tema.
+Mas dar aula ou ensinar é apenas um outro nome para aprender!
+
+O tema da aula resume-se em uma palavra: a palavra ``doutor''.
+
+Hoje, vocês receberão o grau de doutor, um reconhecimento universitário de competência
+para exercer a Medicina. É um privilégio e uma responsabilidade. Mas porque será, mesmo,
+que nos chamamos ``doutores''? E por que nossos pacientes há muitos séculos, nos chamam
+de doutor? Sobre isto trata a aula.
+
+A palavra doutor tem vários significados. O novo dicionário Houaiss lista 15 usos ou
+sentidos para esta palavra! Os três sentidos mais básicos são: 1) o sentido mais antigo
+da palavra doutor é ``um homem sábio''; 2) o segundo mais antigo é ``um médico''; e
+3) no sentido mais recente (em uso desde o século XII DC) designa ``o maior grau universitário''
+(e aqui se incluem os graus de doutor conferidos a não médicos).
+
+Hoje está em moda, ou se pretende que assim seja feito, limitar o uso ao sentido ``3'',
+ao possuidor do título universitário de doutor. Todavia, uma análise histórica dos usos
+deste termo revela que todos derivam de uma só fonte. Vejamos qual seja.
+
+Há séculos, duas palavras têm sido empregadas para designar o profissional da Medicina, isto é,
+aquele que pratica a arte de curar: \ingles{physician} e doutor. Desculpem-me, mas é preciso usar
+esta palavra inglesa, porque não há correspondente em nossa língua. Nos países de língua inglesa,
+formalmente, designa-se o médico como \ingles{physician} (que não podemos traduzir por físico),
+mas em linguagem comum, popular e como vocativo diz-se \ingles{doctor}, doutor. O paciente chama
+seu médico de \ingles{doctor} (coloquialmente, \ingles{doc}). Menciono esta particularidade da
+língua inglesa porque ela conserva em uso atual ambas as palavras que descrevem a atividade e o
+profissional médico. Nos países de herança latina, como o Brasil, falamos sempre doutor.
+
+Qual a história destas palavras? O que tem a ver conosco e com esta cerimônia de colação de grau?
+Bem, vocês agora são médicos e vão receber o grau de doutor. Serão doutores. É preciso saber o
+que isto significa! De onde vêm estas duas palavras? Porquê são usadas? Qual o significado
+original? Sim, porque estas palavras carregam, até nossos dias, seu significado original.
+E, eu penso, esta compreensão é importante para todos nós, pacientes e médicos. É importante,
+especialmente para os doutorandos, hoje.
+
+Cada uma delas vem de uma das duas grandes heranças que culminaram na civilização ocidental:
+a herança judáico-cristã e a herança grega. Pretendo comparar estas heranças e mostrar
+que estão conosco, em nosso dia-a-dia.
+
+A palavra \ingles{physician} é uma herança grega, especialmente importante nos escritos de
+Aristóteles, o filósofo, que viveu no século III antes de Cristo. Deriva de \ingles{physis}, que
+designa todas as coisas que conhecemos ou acreditamos e, neste sentido, corresponde à palavra
+latina natureza.
+
+Na Medicina Grega (e, depois, na Medicina Romana), a cura das doenças se operava por Esculápio,
+o deus da cura ou o deus da Medicina. Seria excessivo explicar aqui toda a noção grega de
+causa e mecanismo de doença. Vou me limitar ao papel do médico.
+O médico era o agente do deus
+da cura. Alguém iniciado, a quem eram revelados os mistérios e o poder de controlar a
+\ingles{phisys}, a natureza. Em razão disto, deste poder de controle, o médico era considerado
+um ser especial, um homem mais que homem, um semideus. Neste papel, a ênfase estava no controle,
+no poder sobre a natureza e sobre o homem. Toda a responsabilidade estava no médico: ele era
+o agente da cura. --- Eu acho que deve advir disto a acusação (às vezes justificada), que os
+médicos se sentem ou gostam de posar como ``deuses''!
+
+Prezados doutorandos, vocês se recordam que, na sala de aula de Patologia, havia um lugar que
+chamávamos Olimpo, um lugar onde ficavam os deuses? Era uma brincadeira, claro. Mas
+brincadeiras e piadas são excelentes para falar coisas sérias.
+
+Vejamos como funcionava o \ingles{physician}, o médico grego. Ele intercedia e procurava predispor
+Esculápio a favor do doente através de oferendas e também recomendava tratamentos em seu nome.
+Esculápio, como deus, podia, sempre, curar todas as doenças. Em outras palavras, o doente obtinha
+a cura do deus Esculápio, através do médico. O doente não conhecia nada, nada lhe era ensinado,
+nem tinha acesso direto ao deus da cura. Era um agente apenas passivo.
+
+Mas o que acontecia se algo saia errado, se a doença seguia seu curso ou se o doente morria?
+De quem era a culpa? Do médico, claro. Ninguém atribuía a culpa a Esculápio (afinal, deus não erra).
+Ora, isto está se tornando moda nos dias de hoje: a culpa sempre é atribuída ao médico! Não é por acaso.
+
+Nesta situação, como podiam se defender os médicos? Fácil! Examinado o doente e diagnosticado um câncer,
+o médico recusava-se a tratar do paciente! --- Parece que Esculápio não tinha a eficácia dos oncologistas
+de hoje!
+
+Não se iludam, idéias têm conseqüências: ainda no século XIX, haviam médicos que assim procediam!
+Outra forma do médico se defender era fazer a culpa recair no paciente: você não quer ser curado,
+você não pode pagar as oferendas, você não tem fé, etc. Em outras palavras, evitava-se o risco e
+a responsabilidade. Hoje, podemos dizer, evita-se o processo por má prática.
+
+Não desejo para mim, nem para vocês, doutorandos, meus novos colegas, uma Medicina destas!
+No entanto, isto não soa familiar a vocês? Não nos parece, às vezes, que estamos vivendo justamente
+isto! Eu acho que sim. Os gregos esperavam muito dos seus médicos. Nossos doentes esperam muito de nós.
+
+É verdade que a Medicina progrediu muito. A mídia está, sempre, repleta de ``milagres'' médicos.
+É verdade que conhecemos muito e temos recursos terapêuticos inimagináveis há 100 anos atrás.
+Mas não podemos tudo. Não somos deuses!
+
+Isto quanto à palavra \ingles{physician} e à Medicina Grega. E quanto à palavra doutor, que nos
+interessa mais diretamente? Lembrem-se, vocês, a partir de hoje, são doutores!
+
+A palavra doutor vem do latim \ingles{docere}, que significa ensinar ou ensinador, professor.
+Tem o mesmo sentido das palavras hebraicas para Mestre e Rabbi. Seu uso remonta aos tempos do
+Velho Testamento, cerca do século VII antes de Cristo.
+
+O Novo Testamento, no evangelho de Lucas, diz-nos que, tendo Jesus se separado de seus pais,
+durante a festa, em Jerusalém, estes o encontraram no meio dos doutores, ensinando.
+Nosso Salvador era um doutor.
+
+Na tradição judaico-cristã, um doutor é um homem sábio, um entendido na doutrina, isto é,
+nas leis religiosas, uma autoridade em Teologia. Por isso, muito cedo, na história da Igreja Cristã,
+os professores de doutrina (especialmente os mais notáveis) foram chamados doutores.
+Mas, como vieram os médicos a se igualar a estes professores religiosos? Porque os médicos
+passaram a ser chamados de doutores?
+
+Para entender isto precisamos estudar outra palavra: a palavra salvação. Em latim, salvação
+tem o sentido de saúde, bem estar, prosperidade, conservação da vida. Na tradição judaico-cristã,
+um doutor se ocupa da salvação, isto é, da saúde. Saúde total, saúde do corpo e saúde da alma.
+
+Para a fé bíblica, o cuidado do corpo faz parte da salvação, a saúde é um aspecto da salvação.
+Recordem-se que, ainda hoje, alguns pacientes nos perguntam: ``E ai, doutor, tem salvação?''
+Ou então: ``Vai se salvar, doutor?'' O médico que busca conhecer, que ensina a cuidar do corpo,
+que ajuda a preservar e a restaurar a saúde, tem um chamado sacerdotal, tal qual o ministro
+religioso (como os padres, presbíteros e pastores).
+
+Contada, resumidamente, através do significado destas três palavras, aqui está a explicação porque
+somos chamados doutores! Porque a Medicina, em nossa tradição, é um sacerdócio, uma atividade sagrada!
+Deste modo, no mundo cristão, \ingles{physician} se tornou doutor! Pronto! Este é o cerne,
+o ponto central desta aula. O mais importante que devemos aprender. Aquilo que não podemos esquecer.
+
+Em ambas as tradições --- e isto está implícito tanto na palavra \ingles{physician} como na palavra
+doutor --- há uma grande responsabilidade para o médico e a Medicina tem, quer gostemos, quer não
+gostemos, uma implicação também religiosa. Não me proponho a discutir estas implicações religiosas,
+neste momento. Seria me alongar demais. No entanto, se coincidem nisto, as tradições grega e bíblica
+diferem profundamente quanto ao papel e quanto ao tipo de responsabilidade do médico.
+
+Para a tradição bíblica, o médico é mais do
+que um cientista ou um técnico, é mais do que um entendido em \ingles{phisys} (natureza) e sua
+responsabilidade não é total. O homem não é um deus e, portanto, não pode ter responsabilidade total.
+Ele erra. O médico erra. O médico, freqüentemente, não conhece e, muitas vezes, quando conhece não
+dispõe de todos os recursos.
+
+Não. Nesta tradição, a responsabilidade final de todas as coisas é de Deus. A nossa é uma
+responsabilidade compartilhada por varios agentes: médicos, pacientes (sim, o paciente também é
+responsável), familiares, sociedade, governo. O que se espera do médico é que faça o seu melhor.
+Não mais. E nas condições em que está inserido. Dentro do possível. Não se pode exigir sempre o melhor
+resultado. Quem pode assegurar que um diagnóstico é 100\% correto? Que o tratamento será 100\% eficaz?
+Que não haverá complicações? Que o doente não morrerá? Não, o médico não é deus! Ele tem o dever
+de fazer seu melhor.
+
+Cumpre-lhe assegurar cuidado, buscar entendimento, ensinar ao paciente e uma fazer a intervenção
+possível. Exige-se do médico um cuidado humano, pessoal e uma adequada aplicação dos recursos. Mas,
+se não há cura ou se o paciente morre, isto não significa, necessariamente, como pensavam os gregos,
+um ato criminoso do médico. Algo que, podendo ser feito, não foi feito ou algo que foi feito errado.
+
+A responsabilidade do médico é de meios e não de fins. O médico não pode assegurar resultados.
+Ele tem o dever de aprimorar seus meios de intervenção sobre a doença. Tem a obrigação de estudar
+e de ensinar. A ênfase é no aprendizado, no aprimoramento, no fazer o melhor. Não no controle.
+Não em garantir um resultado. O controle e o resultado, em seus determinantes últimos,
+dependem de Deus. Não do médico.
+
+Estes dois sentidos, expressos nas plavras \ingles{physician} e doutor (e suas implicações),
+relacionam-se com a situação presente. Hoje, vivemos tempos difíceis, tempos esquizofrênicos.
+Vocês serão vistos tanto como \ingles{physicians} (controladores) como doutores (ensinadores).
+
+Oxalá, todos os pacientes procurem vocês como doutores. Não exijam milagres. Sejam responsáveis,
+colaborem para sua própria cura. Aos que procurarem vocês como \ingles{physicians}, recomendo que
+façam milagres! Porque, nada menos que isto os satisfarão. Bem, talvez, alguns fiquem satisfeitos
+com uma grande indenização!
+
+Isto, evidentemente, é uma brincadeira. Ou até um desabafo de um doutor com 21 anos de experiência.
+Pensem no que se exige hoje da Dermatologia e da Cirurgia Plástica. Ou nos processos por erro médico?
+Um patologista americano pagou (através de sua seguradora, evidentemente) cerca de 7 milhões de
+dólares por um erro de diagnóstico de câncer! Como não errar? Como garantir a cura? Como fazer
+milagres? Eu não sei. Sou apenas um doutor.
+
+Nossos pacientes esperam muito de nós. Confrontados com tão grande expectativa, como satisfazê-la?
+Evidentemente, há muitas causas e explicações para esta elevação da expectativa em relação à Medicina.
+Eu me refiro a essa idéia perniciosa que a Medicina pode resolver todos os problemas de saúde;
+que todos os recursos devem estar disponíveis para todos, todo o tempo e em todo o lugar; que há um
+remédio ou cirurgia para tudo; que, quando não se obtém a completa cura, é culpa de alguém,
+quase sempre do médico.
+
+Como disse, há muitas explicações para esta situação e, não cabe, neste momento, discuti-las.
+Direi, apenas, que, no meu entender, esta idéia perniciosa resulta da repaganização da nossa sociedade.
+Por isso há uma demanda por \ingles{physician}. Afinal, se conhecemos o genoma humano, se podemos clonar!
+Quando nada mais puder resolver, basta apelar para que um Dr.\ Albieri --- esta ridícula personagem da novela
+``O Clone'' --- faça um clone, um outro eu. Bem, nem tudo está perdido: afinal, a Jade é quem faz mais sucesso!
+
+Enquanto isto, os doutores são vilipendiados. Perderam prestígio, ganham pouco ou até ganham bem,
+mas ao custo de excessivo trabalho.
+
+Sim, um \ingles{physician} pode tudo, promete resultado! Um doutor faz, apenas, o melhor possível.
+Um doutor ensina seus pacientes. Diz-lhes a verdade. No consultório, olho no olho. Não na mídia.
+Obtém sua colaboração para alcançar a saúde possível. Ajuda seus pacientes a aceitar a dura realidade.
+A realidade da condição humana. As nossas limitações: dos médicos, dos pacientes, de todos os homens
+e também do governo, dos planos de saúde, dos hospitais, dos administradores de saúde.
+
+Nossa condição inclui a doença, o sofrimento e a morte. Como doutores, quase sempre podemos minorar
+o sofrimento, sempre podemos confortar e ajudar a entender, algumas vezes podemos adiar um pouco a morte
+e até podemos curar. Mas somos apenas doutores. Não somos deuses. Não fazemos milagres!
+
+Chegamos ao final da aula. Eu pretendi ensinar o que é ser médico através do significado de duas palavras.
+Explicar o conflito entre \ingles{physician} e doutor. Está me parecendo que fiz mais um discurso do
+que dei uma aula. De qualquer modo, resta-me, agora, para encerrar, fazer o meu pedido para os novos doutores.
+
+Assim, concluída a aula, eis o meu pedido.
+Bem, talvez este pedido seja também um conselho. Daqueles conselhos que pais, padres, pastores, médicos,
+isto é, doutores no mais antigo sentido, costumam dar. E para os quais, muitas vezes, torcemos o nariz,
+porque sabemos que vai sobrar para nós. Que vai nos dizer que também somos responsáveis!
+
+Meu pedido, como paraninfo de vocês é o seguinte: sejam fiéis à vocação que escolheram. Sejam doutores!
+O começo é agora. Hoje, vocês se tornaram doutores. Não prometam milagres. Façam o seu melhor.
+
+Eu vos felicito, doutores.
+
+Muito obrigado.
+
+\vspace{0.5 cm}
+
+Paulo Roberto Merçon de Vargas
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{}
+%\label{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{}
+%\label{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsubsection{}
+%\label{}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TERMINA O DOCUMENTO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
